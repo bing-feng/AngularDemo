@@ -1,0 +1,60 @@
+<nz-breadcrumb style="margin:16px 0;">
+  <h3>表格</h3>
+</nz-breadcrumb>
+<nz-card>
+  <div nz-row>
+    <div nz-col nzSpan="6">
+      <nz-input-group nzSearch nzSize="default" [nzAddOnAfter]="suffixButton">
+        <input type="text" nz-input placeholder="请输入名称" />
+      </nz-input-group>
+      <ng-template #suffixButton>
+        <button nz-button nzType="primary" nzSize="default" nzSearch><i nz-icon type="search"></i>搜索</button>
+      </ng-template>
+    </div>
+    <div nz-col nzSpan="18" class="text-right">
+      <button nz-button nzType="primary" nzSize="default" ><i nz-icon type="plus"></i>添加</button>&nbsp;
+      <button nz-button nzType="danger" nzSize="default" ><i nz-icon type="close"></i>删除</button>
+    </div>
+  </div>
+  <p> </p>
+  <nz-table
+    #rowSelectionTable
+    nzShowPagination
+    nzShowSizeChanger
+    [nzData]="listOfAllData"
+    (nzCurrentPageDataChange)="currentPageDataChange($event)"
+  >
+    <thead>
+      <tr>
+        <th
+          nzShowCheckbox
+          [(nzChecked)]="isAllDisplayDataChecked"
+          [nzIndeterminate]="isIndeterminate"
+          (nzCheckedChange)="checkAll($event)"
+        ></th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>住址</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of rowSelectionTable.data">
+        <td
+          nzShowCheckbox
+          [(nzChecked)]="mapOfCheckedId[data.id]"
+          [nzDisabled]="data.disabled"
+          (nzCheckedChange)="refreshStatus()"
+        ></td>
+        <td>{{ data.name }}</td>
+        <td>{{ data.age }}</td>
+        <td>{{ data.address }}</td>
+        <td>
+            <a>查看详细</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

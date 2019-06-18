@@ -1,0 +1,93 @@
+<nz-breadcrumb style="margin:16px 0;">
+  
+</nz-breadcrumb>
+
+<nz-row nzGutter="16">
+  <nz-col nzSpan="6">
+    <nz-card>
+      <nz-statistic
+        [nzValue]="11.28"
+        [nzTitle]="'最近7天访问量'"
+        [nzPrefix]="prefixTplOne"
+        [nzSuffix]="'%'"
+        [nzValueStyle]="{ color: '#3F8600' }"
+      >
+      </nz-statistic>
+      <ng-template #prefixTplOne><i nz-icon type="arrow-up"></i></ng-template>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="6">
+    <nz-card>
+      <nz-statistic
+        [nzValue]="9.3"
+        [nzTitle]="'最近一个月访问量'"
+        [nzPrefix]="prefixTplTwo"
+        [nzSuffix]="'%'"
+        [nzValueStyle]="{ color: '#CF1322' }"
+      >
+      </nz-statistic>
+      <ng-template #prefixTplTwo><i nz-icon type="arrow-down"></i></ng-template>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="6">
+    <nz-card>
+      <nz-statistic
+        [nzValue]="11.28"
+        [nzTitle]="'最近一个季度访问量'"
+        [nzPrefix]="prefixTplThree"
+        [nzSuffix]="'%'"
+        [nzValueStyle]="{ color: '#3F8600' }"
+      >
+      </nz-statistic>
+      <ng-template #prefixTplThree><i nz-icon type="arrow-up"></i></ng-template>
+    </nz-card>
+  </nz-col>
+  <nz-col nzSpan="6">
+    <nz-card>
+      <nz-statistic
+        [nzValue]="9.3"
+        [nzTitle]="'最近一年访问量'"
+        [nzPrefix]="prefixTplFour"
+        [nzSuffix]="'%'"
+        [nzValueStyle]="{ color: '#CF1322' }"
+      >
+      </nz-statistic>
+      <ng-template #prefixTplFour><i nz-icon type="arrow-down"></i></ng-template>
+    </nz-card>
+  </nz-col>
+</nz-row>
+<p> </p>
+
+
+<nz-row nzGutter="16">
+  <nz-col nzSpan="12">
+    <nz-card nzTitle="Card title" [nzExtra]="extraTemplate1">
+      <p>Card content</p>
+      <p>Card content</p>
+      <p>Card content</p>
+    </nz-card>
+    <ng-template #extraTemplate1>
+      <a>更多</a>
+    </ng-template>
+  </nz-col>
+  <nz-col nzSpan="12">
+    <nz-card nzTitle="Card title" [nzExtra]="extraTemplate2">
+      <p>Card content</p>
+      <p>Card content</p>
+      <p>Card content</p>
+    </nz-card>
+    <ng-template #extraTemplate2>
+      <a>更多</a>
+    </ng-template>
+  </nz-col>
+</nz-row>
+<p> </p>
+
+
+<nz-row>
+  <nz-col nzSpan="24">
+    <nz-card>
+      <div echarts [options]="options" [theme]="echart_theme"></div>
+    </nz-card>
+  </nz-col>
+</nz-row>
