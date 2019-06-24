@@ -1,0 +1,30 @@
+<nz-breadcrumb style="margin:16px 0;">
+  <h3>Charts</h3>
+</nz-breadcrumb>
+<p></p>
+<nz-row>
+  <nz-col nzSpan="24">
+    <h3>曲线图</h3>
+    <nz-card>
+      <div echarts [options]="option_line" [theme]="echart_theme"></div>
+    </nz-card>
+  </nz-col>
+</nz-row>
+<p></p>
+<nz-row>
+  <nz-col nzSpan="24">
+    <h3>柱形图</h3>
+    <nz-card>
+      <div echarts [options]="option_category" [theme]="echart_theme"></div>
+    </nz-card>
+  </nz-col>
+</nz-row>
+<p></p>
+<nz-row>
+  <nz-col nzSpan="24">
+    <h3>饼形图</h3>
+    <nz-card>
+      <div echarts [options]="option_pie" [theme]="echart_theme"></div>
+    </nz-card>
+  </nz-col>
+</nz-row>

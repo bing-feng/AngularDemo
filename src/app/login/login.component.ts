@@ -12,7 +12,6 @@ export class LoginComponent implements OnInit {
 
   isValid:boolean = true;
   submitForm(): void {
-    let index = 0;
     this.isValid = true;
     
     for (const i in this.validateForm.controls) {
@@ -21,10 +20,9 @@ export class LoginComponent implements OnInit {
 
       let temp:boolean = this.validateForm.controls[i].valid;
       
-      if(index < 2 && !temp) {
+      if(!temp) {
         this.isValid = false;
       }
-      index++;
     }
     if(this.isValid) {
       this.router.navigate(['/home']);

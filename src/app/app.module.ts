@@ -6,6 +6,9 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './admin/home/home.component';
 import { TableComponent } from './admin/table/table.component';
 import { LoginComponent } from './login/login.component';
+import { FormsComponent } from './admin/forms/forms.component';
+import { ChartsComponent } from './admin/charts/charts.component';
+import { TreeComponent } from './admin/tree/tree.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +28,10 @@ registerLocaleData(zh);
     AdminComponent,
     HomeComponent,
     TableComponent,
-    LoginComponent
+    LoginComponent,
+    FormsComponent,
+    ChartsComponent,
+    TreeComponent
   ],
   imports: [
     BrowserModule,

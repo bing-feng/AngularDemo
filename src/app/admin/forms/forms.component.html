@@ -1,0 +1,111 @@
+<nz-breadcrumb style="margin:16px 0;">
+  <h3>表单</h3>
+</nz-breadcrumb>
+
+
+<nz-row>
+  <nz-col nzSpan="24">
+  <nz-card>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>用户名</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-input-group [nzPrefix]="prefixUser">
+              <input type="text" nz-input formControlName="userName" />
+            </nz-input-group>
+            <nz-form-explain *ngIf="validateForm.get('userName')?.dirty && validateForm.get('userName')?.errors"
+              >请输入用户名!</nz-form-explain
+            >
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Email</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <nz-input-group [nzPrefix]="prefixUser">
+              <input type="text" nz-input formControlName="email" />
+            </nz-input-group>
+            <nz-form-explain *ngIf="validateForm.get('email')?.dirty && validateForm.get('email')?.errors">
+              请输入正确的Email!
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>联系方式</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phoneNumber']">
+            <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+              <ng-template #addOnBeforeTemplate>
+                <nz-select formControlName="phoneNumberPrefix" style="width: 70px;">
+                  <nz-option nzLabel="+86" nzValue="+86"></nz-option>
+                  <nz-option nzLabel="+87" nzValue="+87"></nz-option>
+                </nz-select>
+              </ng-template>
+              <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+            </nz-input-group>
+            <nz-form-explain *ngIf="validateForm.get('phoneNumber')?.dirty && validateForm.get('phoneNumber')?.errors"
+              >请输入正确的电话号码!</nz-form-explain
+            >
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>密码</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input
+              nz-input
+              type="password"
+              id="password"
+              formControlName="password"
+              (ngModelChange)="updateConfirmValidator()"
+            />
+            <nz-form-explain *ngIf="validateForm.get('password')?.dirty && validateForm.get('password')?.errors"
+              >请输入密码!</nz-form-explain
+            >
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>再输入密码</nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+            <nz-form-explain
+              *ngIf="validateForm.get('checkPassword')?.dirty && validateForm.get('checkPassword')?.errors"
+            >
+              <ng-container *ngIf="validateForm.get('checkPassword')?.hasError('required')">
+                请再输入一次密码!
+              </ng-container>
+              <ng-container *ngIf="validateForm.get('checkPassword')?.hasError('confirm')">
+                两次密码不一致!
+              </ng-container>
+            </nz-form-explain>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="nickname" nzRequired>
+            <span>
+              昵称
+              <i
+                nz-icon
+                nz-tooltip
+                nzTitle="请输入昵称"
+                type="question-circle"
+                theme="outline"
+              ></i>
+            </span>
+          </nz-form-label>
+          <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="nickname" formControlName="nickname" />
+            <nz-form-explain *ngIf="validateForm.get('nickname')?.dirty && validateForm.get('nickname')?.errors"
+              >请输入昵称!</nz-form-explain
+            >
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row style="margin-bottom:8px;">
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button nz-button nzType="primary"><i nz-icon nzType="check" nzTheme="outline"></i> 保存</button>
+          </nz-form-control>
+        </nz-form-item>
+
+    </form>
+        
+  </nz-card>
+  </nz-col>
+</nz-row>
