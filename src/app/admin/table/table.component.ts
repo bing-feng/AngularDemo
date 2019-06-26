@@ -1,4 +1,5 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd';
 
 export interface Data {
   id: number;
@@ -14,19 +15,39 @@ export interface Data {
   styleUrls: ['./table.component.css']
 })
 export class TableComponent {
-  constructor() {
+  constructor(private modalService: NzModalService) {
   }
   isAllDisplayDataChecked = false;
-  isOperating = false;
   isIndeterminate = false;
   listOfDisplayData: Data[] = [];
   listOfAllData: Data[] = [];
   mapOfCheckedId: { [key: string]: boolean } = {};
   numberOfChecked = 0;
 
+  // 搜索内容
+  searchValue = "";
+
+  isVisible = false;
+
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    this.modalService.warning({
+      nzTitle: '提示',
+      nzContent: '添加成功！'
+    });
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
+
   currentPageDataChange($event: Data[]): void {
     this.listOfDisplayData = $event;
-    this.refreshStatus();
+    this.operateData();
   }
 
   refreshStatus(): void {
@@ -45,24 +66,70 @@ export class TableComponent {
   }
 
   operateData(): void {
-    this.isOperating = true;
-    setTimeout(() => {
-      this.listOfAllData.forEach(item => (this.mapOfCheckedId[item.id] = false));
-      this.refreshStatus();
-      this.isOperating = false;
-    }, 1000);
+    this.listOfAllData.forEach(item => (this.mapOfCheckedId[item.id] = false));
+    this.refreshStatus();
   }
 
-  ngOnInit(): void {
-    for (let i = 0; i < 100; i++) {
+  delAll(): void {
+    let ids = "0";
+    this.listOfDisplayData.forEach(item => {
+      if(this.mapOfCheckedId[item.id]) {
+        ids = ids + "," + item.id;
+      }
+    });
+    ids = ids.replace("0,", "");
+
+    if(ids !== "0") {
+      this.modalService.confirm({
+        nzTitle: '提示',
+        nzContent: '确定要删除[' + ids + ']吗？',
+        nzOnOk: () => {
+          this.modalService.success({
+            nzTitle: '提示',
+            nzContent: '删除成功！'
+          });
+        }
+      });
+    } else {
+      this.modalService.warning({
+        nzTitle: '提示',
+        nzContent: '请选择要删除的内容！'
+      });
+    }
+  }
+
+  del(id: String): void {
+    this.modalService.confirm({
+      nzTitle: '提示',
+      nzContent: '确定要删除[' + id + ']吗？',
+      nzOnOk: () => {
+        this.modalService.success({
+          nzTitle: '提示',
+          nzContent: '删除成功！'
+        });
+      }
+    });
+  }
+
+  getData(): void {
+    this.listOfAllData = [];
+    let count = Math.random()*100;
+
+    for (let i = 0; i < count; i++) {
       this.listOfAllData.push({
-        id: i,
-        name: `Edward King ${i}`,
+        id: i + 1,
+        name: this.searchValue == "" ? `Edward King ${i}` : `${this.searchValue} ${i}`,
         age: 32,
         address: `London, Park Lane no. ${i}`,
         disabled: false
       });
     }
+  }
+  search(): void {
+    this.getData();
+  }
+  ngOnInit(): void {
+    this.getData();
   }
 }
 

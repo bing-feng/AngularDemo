@@ -5,15 +5,15 @@
   <div nz-row>
     <div nz-col nzSpan="6">
       <nz-input-group nzSearch nzSize="default" [nzAddOnAfter]="suffixButton">
-        <input type="text" nz-input placeholder="请输入名称" />
+        <input type="text" nz-input placeholder="请输入名称" [(ngModel)]="searchValue" />
       </nz-input-group>
       <ng-template #suffixButton>
-        <button nz-button nzType="primary" nzSize="default" nzSearch><i nz-icon type="search"></i>搜索</button>
+        <button nz-button nzType="primary" nzSize="default" nzSearch (click)="search()"><i nz-icon type="search"></i>搜索</button>
       </ng-template>
     </div>
     <div nz-col nzSpan="18" class="text-right">
-      <button nz-button nzType="primary" nzSize="default" ><i nz-icon type="plus"></i>添加</button>&nbsp;
-      <button nz-button nzType="danger" nzSize="default" ><i nz-icon type="close"></i>删除</button>
+      <button nz-button nzType="primary" nzSize="default"  (click)="showModal()"><i nz-icon type="plus"></i>添加</button>&nbsp;
+      <button nz-button nzType="danger" nzSize="default" (click)="delAll()"><i nz-icon type="close"></i>删除</button>
     </div>
   </div>
   <p> </p>
@@ -23,6 +23,7 @@
     nzShowSizeChanger
     [nzData]="listOfAllData"
     (nzCurrentPageDataChange)="currentPageDataChange($event)"
+    [nzShowTotal]="totalTemplate"
   >
     <thead>
       <tr>
@@ -52,9 +53,38 @@
         <td>
             <a>查看详细</a>
             <nz-divider nzType="vertical"></nz-divider>
-            <a>删除</a>
+            <a (click)="del(data.id)">删除</a>
         </td>
       </tr>
     </tbody>
   </nz-table>
+  <ng-template #totalTemplate let-total>共 {{ total }} 条数据。</ng-template>
 </nz-card>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="添加" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name" >
+      <span>姓名</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input id="name" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="age" >
+      <span>年龄</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input id="age"  />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="address" >
+      <span>地址</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <input nz-input id="address"  />
+    </nz-form-control>
+  </nz-form-item>
+</nz-modal>

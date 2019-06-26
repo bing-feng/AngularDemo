@@ -1,3 +1,14 @@
-<p>
-  tree works!
-</p>
+<nz-breadcrumb style="margin:16px 0;">
+  <h3>树</h3>
+</nz-breadcrumb>
+<nz-card>
+  <button nz-button nzType="primary" nzSize="default"  (click)="save()"><i nz-icon type="check"></i> 保存</button>
+  <nz-tree #nzTreeComponent
+    [nzData]="nodes" 
+    nzShowLine
+    nzCheckable
+    [nzCheckedKeys]="defaultCheckedKeys"
+    (nzClick)="nzClick($event)"
+    (nzCheckBoxChange)="nzCheck($event)"
+  > </nz-tree>
+</nz-card>
